@@ -1,51 +1,51 @@
 const jwt = require("jsonwebtoken");
-const user = require("../models/userModel");
+const pharmacy = require("../models/pharmacyModel");
 // const admin = require("../Models/adminModel");
 
 // This Is Guard For Customer...
-module.exports.userGuard = (req, res, next) => {
-  try {
-    const token = req.headers.authorization.split(" ")[1];
-    const data = jwt.verify(token, "rentnreaduser");
-    console.log(data);
-    user
-      .findOne({
-        $and: [
-          { _id: data.userId },
-          {
-            userType: "user",
-          },
-        ],
-      })
-      .then((udata) => {
-        req.userInfo = udata;
-        next();
-      })
-      .catch((e) => {
-        res.json({ msg: "Invalid Token" });
-      });
-  } catch (e) {
-    res.json({ msg: "Invalid Token" });
-  }
-};
+// module.exports.userGuard = (req, res, next) => {
+//   try {
+//     const token = req.headers.authorization.split(" ")[1];
+//     const data = jwt.verify(token, "medicinefinder");
+//     console.log(data);
+//     user
+//       .findOne({
+//         $and: [
+//           { _id: data.userId },
+//           {
+//             userType: "user",
+//           },
+//         ],
+//       })
+//       .then((udata) => {
+//         req.userInfo = udata;
+//         next();
+//       })
+//       .catch((e) => {
+//         res.json({ msg: "Invalid Token" });
+//       });
+//   } catch (e) {
+//     res.json({ msg: "Invalid Token" });
+//   }
+// };
 
-// This Is Guard For Admin...
-module.exports.adminGuard = (req, res, next) => {
+// This Is Guard For Pharmacy...
+module.exports.pharmacyGuard = (req, res, next) => {
   try {
     const token = req.headers.authorization.split(" ")[1];
-    const data = jwt.verify(token, "rentnreaduser");
+    const data = jwt.verify(token, "medicinefinder");
     console.log(data);
-    user
+    pharmacy
       .findOne({
         $and: [
-          { _id: data.userId },
+          { _id: data.pharmacyId },
           {
-            userType: "admin",
+            userType: "pharmacy",
           },
         ],
       })
-      .then((adata) => {
-        req.adminInfo = adata;
+      .then((pdata) => {
+        req.pharmacyInfo = pdata;
         next();
       })
       .catch((e) => {
