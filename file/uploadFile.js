@@ -7,7 +7,7 @@ const storage = multer.diskStorage({
     } else if (file.fieldname === "pharmacy_pic") {
       cb(null, "./pharmacyImages");
     } else if (file.fieldname === "user_img") {
-      cb(null, "./userImages");
+      cb(null, "./profileuserImages");
     }
   },
   filename: (req, file, cb) => {

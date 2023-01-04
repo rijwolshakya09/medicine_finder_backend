@@ -5,7 +5,7 @@ mongoose.set('strictQuery', true);
 const connectDB = async () => {
   try {
     const conn = await mongoose.connect(
-      "mongodb+srv://rijwolshakya09:N%40ruto_Uzumaki09@medicinefinder.9depvzr.mongodb.net/?retryWrites=true&w=majority",
+      "mongodb+srv://rijwolshakya09:shakyarijwol09@medicinefinder.7vkic47.mongodb.net/medicineFinderDB?retryWrites=true&w=majority",
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,

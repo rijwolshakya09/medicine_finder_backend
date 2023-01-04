@@ -5,7 +5,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
+//Routers Are Imported Here
+const pharmacyRouter = require("./routers/pharmacyRouter");
 
+
+//Routers Are Used Here
+app.use(pharmacyRouter);
 
 // Importing Database Connection
 const connectDB = require("./config/dbconnection");
