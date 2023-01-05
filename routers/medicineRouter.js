@@ -10,17 +10,17 @@ const uploadFile = require("../file/uploadFile");
 router.post(
   "/medicine/add",
   auth.pharmacyGuard,
-  uploadFile.single("medicine_img"),
+  uploadFile.single("medicine_image"),
   (req, res) => {
     if (req.file == undefined) {
       return res.status(401).json({
         msg: "Invalid file formate",
       });
     }
-    const medicine_image = req.file.medicine_image;
     const medicine_name = req.body.medicine_name;
     const medicine_price = req.body.medicine_price;
     const medicine_description = req.body.medicine_description;
+    const medicine_image = req.file.filename;
     const status = req.body.status;
     const pharmacyId = req.pharmacyInfo._id;
 
@@ -110,7 +110,7 @@ router.get("/medicine/getone/:id", (req, res) => {
 router.put(
   "/medicine/update",
   auth.pharmacyGuard,
-  uploadFile.single("medicine_img"),
+  uploadFile.single("medicine_image"),
   (req, res) => {
     const medicine_name = req.body.medicine_name;
     const medicine_price = req.body.medicine_price;

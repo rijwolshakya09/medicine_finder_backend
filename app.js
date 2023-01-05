@@ -11,12 +11,15 @@ connectDB();
 
 app.use(express.static(__dirname + "/pharmacistImages"));
 app.use(express.static(__dirname + "/pharmacyImages"));
+app.use(express.static(__dirname + "/medicineImages"));
 
 //Routers Are Imported Here
 const pharmacyRouter = require("./routers/pharmacyRouter");
+const medicineRouter = require("./routers/medicineRouter");
 
 //Routers Are Used Here
 app.use(pharmacyRouter);
+app.use(medicineRouter);
 
 
 
