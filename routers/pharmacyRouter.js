@@ -158,20 +158,28 @@ router.put(
   auth.pharmacyGuard,
   uploadFile.single("profile_pic"),
   (req, res) => {
+    const first_name = req.body.first_name;
+    const last_name = req.body.last_name;
+    const contact_no = req.body.contact_no;
+    const email = req.body.email;
+    // const id = req.body._id;
     if (req.file == undefined) {
       Pharmacy.updateOne(
         { _id: req.pharmacyInfo._id },
         {
-          first_name: req.body.first_name,
-          last_name: req.body.last_name,
-          contact_no: req.body.contact_no,
-          email: req.body.email,
+          first_name: first_name,
+          last_name: last_name,
+          contact_no: contact_no,
+          email: email,
         }
       )
         .then(() => {
           res
             .status(201)
-            .json({ msg: "Pharmacist Profile Updated Successfully", success: true });
+            .json({
+              msg: "Pharmacist Profile Updated Successfully",
+              success: true,
+            });
         })
         .catch((e) => {
           res.status(400).json({ msg: e });
@@ -180,17 +188,20 @@ router.put(
       Pharmacy.updateOne(
         { _id: req.pharmacyInfo._id },
         {
-          first_name: req.body.first_name,
-          last_name: req.body.last_name,
-          contact_no: req.body.contact_no,
-          email: req.body.email,
+          first_name: first_name,
+          last_name: last_name,
+          contact_no: contact_no,
+          email: email,
           profile_pic: req.file.filename,
         }
       )
         .then(() => {
           res
             .status(201)
-            .json({ msg: "Pharmacist Profile Updated Successfully", success: true });
+            .json({
+              msg: "Pharmacist Profile Updated Successfully",
+              success: true,
+            });
         })
         .catch((e) => {
           res
@@ -206,19 +217,25 @@ router.put(
   auth.pharmacyGuard,
   uploadFile.single("pharmacy_pic"),
   (req, res) => {
+    const pharmacy_name = req.body.pharmacy_name;
+    const address = req.body.address;
+    const description = req.body.description;
     if (req.file == undefined) {
       Pharmacy.updateOne(
         { _id: req.pharmacyInfo._id },
         {
-          pharmacy_name: req.body.pharmacy_name,
-          address: req.body.address,
-          description: req.body.description,
+          pharmacy_name: pharmacy_name,
+          address: address,
+          description: description,
         }
       )
         .then(() => {
           res
             .status(201)
-            .json({ msg: "Pharmacy Details Updated Successfully", success: true });
+            .json({
+              msg: "Pharmacy Details Updated Successfully",
+              success: true,
+            });
         })
         .catch((e) => {
           res.status(400).json({ msg: e });
@@ -227,16 +244,19 @@ router.put(
       Pharmacy.updateOne(
         { _id: req.pharmacyInfo._id },
         {
-          pharmacy_name: req.body.pharmacy_name,
-          address: req.body.address,
-          description: req.body.description,
+          pharmacy_name: pharmacy_name,
+          address: address,
+          description: description,
           pharmacy_pic: req.file.filename,
         }
       )
         .then(() => {
           res
             .status(201)
-            .json({ msg: "Pharmacy Details Updated Successfully", success: true });
+            .json({
+              msg: "Pharmacy Details Updated Successfully",
+              success: true,
+            });
         })
         .catch((e) => {
           res
