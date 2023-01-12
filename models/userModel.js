@@ -19,7 +19,7 @@ const User = new mongoose.Schema({
   gender: {
     type: String,
   },
-  profile_pic: {
+  profile_picture: {
     type: String,
   },
   email: {
@@ -33,7 +33,10 @@ const User = new mongoose.Schema({
   password: {
     type: String,
     required: true,
-  }
+  },
+  userType: {
+    type: String,
+  },
 });
 
 module.exports = mongoose.model("User", User);

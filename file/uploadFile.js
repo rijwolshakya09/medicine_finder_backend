@@ -6,7 +6,7 @@ const storage = multer.diskStorage({
       cb(null, "./pharmacistImages");
     } else if (file.fieldname === "pharmacy_pic") {
       cb(null, "./pharmacyImages");
-    } else if (file.fieldname === "user_img") {
+    } else if (file.fieldname === "profile_picture") {
       cb(null, "./profileuserImages");
     } else if (file.fieldname === "medicine_image") {
       cb(null, "./medicineImages");
@@ -36,7 +36,14 @@ const filter = (req, file, cb) => {
     } else {
       cb(null, false);
     }
+  } else if (file.fieldname === "profile_picture") {
+    if (file.mimetype == "image/png" || file.mimetype == "image/jpeg") {
+      cb(null, true);
+    } else {
+      cb(null, false);
+    }
   }
+  
 };
 
 const uploadFile = multer({
