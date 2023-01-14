@@ -46,6 +46,8 @@ router.post(
         const pharmacy_name = req.body.pharmacy_name;
         const description = req.body.description;
         const address = req.body.address;
+        const lat = req.body.lat;
+        const lng = req.body.lng;
         const contact_no = req.body.contact_no;
         const profile_pic = req.files.profile_pic[0].filename;
         const pharmacy_pic = req.files.pharmacy_pic[0].filename;
@@ -60,6 +62,8 @@ router.post(
             pharmacy_name: pharmacy_name,
             description: description,
             address: address,
+            lat: lat,
+            lng: lng,
             contact_no: contact_no,
             profile_pic: profile_pic,
             pharmacy_pic: pharmacy_pic,
@@ -126,6 +130,8 @@ router.get("/pharmacy/get", auth.pharmacyGuard, (req, res) => {
       pharmacy_name: req.pharmacyInfo.pharmacy_name,
       description: req.pharmacyInfo.description,
       address: req.pharmacyInfo.address,
+      lat: req.pharmacyInfo.lat,
+      lng: req.pharmacyInfo.lng,
       contact_no: req.pharmacyInfo.contact_no,
       profile_pic: req.pharmacyInfo.profile_pic,
       pharmacy_pic: req.pharmacyInfo.pharmacy_pic,
@@ -220,6 +226,8 @@ router.put(
     const pharmacy_name = req.body.pharmacy_name;
     const address = req.body.address;
     const description = req.body.description;
+    const lat = req.body.lat;
+    const lng = req.body.lng;
     if (req.file == undefined) {
       Pharmacy.updateOne(
         { _id: req.pharmacyInfo._id },
@@ -227,6 +235,8 @@ router.put(
           pharmacy_name: pharmacy_name,
           address: address,
           description: description,
+          lat: lat,
+          lng: lng,
         }
       )
         .then(() => {
@@ -247,6 +257,8 @@ router.put(
           pharmacy_name: pharmacy_name,
           address: address,
           description: description,
+          lat: lat,
+          lng: lng,
           pharmacy_pic: req.file.filename,
         }
       )

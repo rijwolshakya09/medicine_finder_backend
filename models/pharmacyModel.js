@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+require('mongoose-double')(mongoose);
 
 //User Model Collection Create
 const Pharmacy = new mongoose.Schema({
@@ -17,6 +18,12 @@ const Pharmacy = new mongoose.Schema({
   },
   address: {
     type: String,
+  },
+  lat:{
+    type: mongoose.Schema.Types.Double,
+  },
+  lng:{
+    type: mongoose.Schema.Types.Double,
   },
   contact_no: {
     type: String,
