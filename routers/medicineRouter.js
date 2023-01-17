@@ -70,6 +70,26 @@ router.get("/medicine/getbyPharmacy", auth.pharmacyGuard, (req, res) => {
 // route to get medicine by all user
 router.get("/medicine/getall", (req, res) => {
   Medicine.find()
+    .populate("pharmacyId")
+    .then((medicine) => {
+      if (medicine != null) {
+        res.status(200).json({
+          success: true,
+          data: medicine,
+        });
+      }
+    })
+    .catch((e) => {
+      res.status(400).json({
+        msg: e,
+      });
+    });
+});
+
+// route to get medicine by all user
+router.get("/medicine/all", (req, res) => {
+  Medicine.find()
+    .populate("pharmacyId")
     .then((medicine) => {
       if (medicine != null) {
         res.status(200).json({
