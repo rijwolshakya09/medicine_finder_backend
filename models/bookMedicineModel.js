@@ -22,6 +22,7 @@ const BookMedicine = new mongoose.Schema({
   },
   status: {
     type: String,
+    default: "Pending",
     required: true,
   },
 });
