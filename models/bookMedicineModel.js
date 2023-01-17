@@ -7,7 +7,7 @@ const BookMedicine = new mongoose.Schema({
     ref: "Medicine",
     required: true,
   },
-  user: {
+  userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
     required: true,

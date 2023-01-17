@@ -68,7 +68,7 @@ router.post("/user/login", (req, res) => {
         }
         //It creates token for the logged in user...
         //The token stores the logged in user`s ID...
-        const token = jwt.sign({ userId: user_data._id }, "rentnreaduser");
+        const token = jwt.sign({ userId: user_data._id }, "medicinefinder");
         res.status(201).json({ token: token, userType: user_data.userType });
       });
     })

@@ -18,11 +18,13 @@ app.use(express.static(__dirname + "/profileuserImages"));
 const pharmacyRouter = require("./routers/pharmacyRouter");
 const medicineRouter = require("./routers/medicineRouter");
 const userRouter = require("./routers/userRouter");
+const bookMedicineRouter = require("./routers/bookMedicineRouter");
 
 //Routers Are Used Here
 app.use(pharmacyRouter);
 app.use(medicineRouter);
 app.use(userRouter);
+app.use(bookMedicineRouter);
 
 
 

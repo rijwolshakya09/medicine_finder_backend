@@ -19,12 +19,15 @@ module.exports.userGuard = (req, res, next) => {
       })
       .then((udata) => {
         req.userInfo = udata;
+        console.log(req.userInfo);
         next();
       })
       .catch((e) => {
+        console.log(e);
         res.json({ msg: "Invalid Token" });
       });
   } catch (e) {
+    console.log(e);
     res.json({ msg: "Invalid Token" });
   }
 };

@@ -10,14 +10,14 @@ const BookMedicine = require("../models/bookMedicineModel");
 // route to add Medicine by pharmacy
 router.post("/medicine/book", auth.userGuard, (req, res) => {
   const medicine = req.body.medicine;
-  const user = req.userInfo._id;
+  const userId = req.userInfo._id;
   const quantity = req.body.quantity;
   const total_price = req.body.total_price;
   const status = req.body.status;
-
+  console.log(userId);
   const data = new BookMedicine({
     medicine: medicine,
-    user: user,
+    userId: userId,
     quantity: quantity,
     total_price: total_price,
     status: status,
@@ -39,7 +39,7 @@ router.post("/medicine/book", auth.userGuard, (req, res) => {
 
 // route to get MEdicine by Pharmacy
 router.get("/medicine/booked", auth.userGuard, (req, res) => {
-  BookMedicine.find({ user: req.userInfo._id })
+  BookMedicine.find({ userId: req.userInfo._id })
     .sort({
       createdAt: "desc",
     })
@@ -75,8 +75,29 @@ router.get("/medicine/booked", auth.userGuard, (req, res) => {
 //     });
 // });
 
+// router to change status of booked medicine
+router.put("/medicine/pickedup", auth.pharmacyGuard, (req, res) => {
+  BookMedicine.updateOne(
+    {
+      _id: req.body.id,
+    },
+    {
+      status: "Picked Up",
+    }
+  )
+    .then(() => {
+      res.status(201).json({
+        msg: "Medicine Picked Up Successful",
+      });
+    })
+    .catch((e) => {
+      res.status(400).json({
+        msg: e,
+      });
+    });
+});
 
-//Router To Delete Booked Medicine 
+//Router To Delete Booked Medicine
 router.delete(
   "/medicine/delete/:bookedMedicineId",
   auth.pharmacyGuard,
