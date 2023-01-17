@@ -105,6 +105,25 @@ router.get("/medicine/all", (req, res) => {
     });
 });
 
+// route to get medicine by all user
+router.get("/medicine/get/:pharmacyId", (req, res) => {
+  Medicine.find({pharmacyId: req.params.pharmacyId})
+    .populate("pharmacyId")
+    .then((medicine) => {
+      if (medicine != null) {
+        res.status(200).json({
+          success: true,
+          data: medicine,
+        });
+      }
+    })
+    .catch((e) => {
+      res.status(400).json({
+        msg: e,
+      });
+    });
+});
+
 // route to get one medicine by all user
 router.get("/medicine/getone/:id", (req, res) => {
   Medicine.findOne({
