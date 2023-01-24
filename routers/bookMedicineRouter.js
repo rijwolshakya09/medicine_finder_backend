@@ -43,6 +43,8 @@ router.get("/medicine/booked", auth.userGuard, (req, res) => {
     .sort({
       createdAt: "desc",
     })
+    .populate("medicine")
+    .populate("userId")
     .then((medicine) => {
       res.status(201).json({
         success: true,
@@ -55,6 +57,54 @@ router.get("/medicine/booked", auth.userGuard, (req, res) => {
       });
     });
 });
+
+// route to get MEdicine by Pharmacy
+router.get("/medicine/bookedphar",  (req, res) => {
+  BookMedicine.find({})
+    .sort({
+      createdAt: "desc",
+    })
+    .populate("medicine")
+    .populate("userId")
+    .then((medicine) => {
+      res.status(201).json({
+        success: true,
+        data: medicine,
+      });
+    })
+    .catch((e) => {
+      res.status(400).json({
+        msg: e,
+      });
+    });
+});
+
+// route to get MEdicine by Pharmacy
+router.get("/medicine/bookmedphar", auth.pharmacyGuard, (req, res) => {
+    BookMedicine.find({})
+      .then((bookmed) => {
+        if (bookmed != null) {
+            Medicine.findOne({ pharmacyId: req.pharmacyInfo._id }).then((medicine) => {
+              console.log(medicine.pharmacyId);
+              res.status(200).json({
+                success: true,
+                data: medicine,
+              })
+              // BookMedicine.find({ pharmacy: { $in: medicine.pharmacyId } }).then((pharmed) => {
+              //   res.status(200).json({
+              //     success: true,
+              //     data: pharmed,
+              //   });
+              // });
+            });
+          }
+      })
+      .catch((e) => {
+        res.status(400).json({
+          msg: e,
+        });
+      });
+  });
 
 // // route to get medicine by all user
 // router.get("/medicine/get/:pharmacyId", (req, res) => {
@@ -99,7 +149,7 @@ router.put("/medicine/pickedup", auth.pharmacyGuard, (req, res) => {
 
 //Router To Delete Booked Medicine
 router.delete(
-  "/medicine/delete/:bookedMedicineId",
+  "/bookmedicine/delete/:bookedMedicineId",
   auth.pharmacyGuard,
   (req, res) => {
     console.log(req.params.bookedMedicineId);
